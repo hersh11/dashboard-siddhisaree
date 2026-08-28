@@ -87,8 +87,12 @@ function sortRows(rows, sortState) {
 
 function bindSortableHeaders(table, sortState, onChange) {
   table.querySelectorAll("th[data-sort]").forEach((th) => {
-    th.innerHTML = `${th.textContent}<span class="sort-arrow">↕</span>`;
-    th.addEventListener("click", () => {
+    const label = th.textContent;
+    th.innerHTML = `${label}<span class="sort-arrow">↕</span>`;
+    th.tabIndex = 0;
+    th.setAttribute("role", "button");
+    th.setAttribute("aria-label", `Sort by ${label}`);
+    const activate = () => {
       if (sortState.key === th.dataset.sort) {
         sortState.dir *= -1;
       } else {
@@ -96,6 +100,13 @@ function bindSortableHeaders(table, sortState, onChange) {
         sortState.dir = 1;
       }
       onChange();
+    };
+    th.addEventListener("click", activate);
+    th.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        activate();
+      }
     });
   });
 }
