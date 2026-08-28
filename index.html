@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Siddhi Sarees | Order Analytics Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b8324a'/%3E%3Ctext x='32' y='45' font-size='36' font-family='Arial' font-weight='800' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("siddhi-theme") || "light";
+      } catch (err) {}
+    </script>
+    <script src="./chart.umd.min.js"></script>
+    <script src="./dashboard-data.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">S</span>
+          <div>
+            <strong>Siddhi Sarees</strong>
+            <span>Internal Ops Analytics</span>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Dashboard sections">
+          <a href="#overview" class="active">Overview</a>
+          <a href="#orders">Orders</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#customers">Customers</a>
+          <a href="#team">Team</a>
+        </nav>
+
+        <button id="themeToggle" class="theme-toggle" type="button">🌙 Dark Mode</button>
+
+        <div class="story-card">
+          <span>Internship Project</span>
+          <p>Digitizing bespoke order tracking from customer enquiry to design, production, QC, packaging, shipping, and delivery.</p>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section class="hero" id="overview">
+          <div>
+            <h1>Internal Order Management & Business Analytics Dashboard</h1>
+            <p class="hero-copy">A working analytics layer for Siddhi Sarees that turns scattered order notes, assignments, and production updates into management-ready insights.</p>
+          </div>
+          <div class="hero-panel">
+            <span class="pulse"></span>
+            <div>
+              <strong id="healthScore">--%</strong>
+              <span>workflow completion visibility</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="filters" aria-label="Dashboard filters">
+          <label>
+            <span>Date From</span>
+            <input id="dateFrom" type="date" />
+          </label>
+          <label>
+            <span>Date To</span>
+            <input id="dateTo" type="date" />
+          </label>
+          <label>
+            <span>Status</span>
+            <select id="statusFilter"></select>
+          </label>
+          <label>
+            <span>Category</span>
+            <select id="categoryFilter"></select>
+          </label>
+          <label>
+            <span>Channel</span>
+            <select id="channelFilter"></select>
+          </label>
+          <label>
+            <span>Priority</span>
+            <select id="priorityFilter"></select>
+          </label>
+          <button id="resetFilters" type="button">Reset</button>
+        </section>
+
+        <section class="kpi-grid" aria-label="Key performance indicators">
+          <article class="kpi-card">
+            <span>Total Orders</span>
+            <strong id="kpiOrders">0</strong>
+            <small id="kpiOrdersSub">Across selected period</small>
+          </article>
+          <article class="kpi-card">
+            <span>Delivered Revenue</span>
+            <strong id="kpiRevenue">0</strong>
+            <small id="kpiRevenueSub">Only delivered orders</small>
+          </article>
+          <article class="kpi-card">
+            <span>Avg Order Value</span>
+            <strong id="kpiAov">0</strong>
+            <small id="kpiAovSub">Final price average</small>
+          </article>
+          <article class="kpi-card">
+            <span>Repeat Orders</span>
+            <strong id="kpiRepeat">0%</strong>
+            <small id="kpiRepeatSub">Returning customer share</small>
+          </article>
+        </section>
+
+        <section class="grid two">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <span>Sales Trend</span>
+                <h2>Monthly revenue and order flow</h2>
+              </div>
+            </div>
+            <div class="chart-wrap tall"><canvas id="trendChart"></canvas></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <span>Status Mix</span>
+                <h2>Current order outcomes</h2>
+              </div>
+            </div>
+            <div class="chart-wrap tall"><canvas id="statusChart"></canvas></div>
+          </article>
+        </section>
+
+        <section class="grid two" id="orders">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <span>Product Analytics</span>
+                <h2>Revenue by category</h2>
+              </div>
+            </div>
+            <div class="chart-wrap"><canvas id="categoryChart"></canvas></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <span>Order Sources</span>
+                <h2>Channel contribution</h2>
+              </div>
+            </div>
+            <div class="chart-wrap"><canvas id="channelChart"></canvas></div>
+          </article>
+        </section>
+
+        <section class="grid two" id="workflow">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <span>Lifecycle</span>
+                <h2>Stage completion funnel</h2>
+              </div>
+            </div>
+            <div class="chart-wrap"><canvas id="stageChart"></canvas></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <span>Production Movement</span>
+                <h2>Average time spent by stage</h2>
+              </div>
+            </div>
+            <div class="chart-wrap"><canvas id="durationChart"></canvas></div>
+          </article>
+        </section>
+
+        <section class="grid two" id="customers">
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <span>Customer Base</span>
+                <h2>Domestic and NRI demand</h2>
+              </div>
+            </div>
+            <div class="chart-wrap"><canvas id="geoChart"></canvas></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <span>Preferences</span>
+                <h2>Top colors, fabrics, and work types</h2>
+              </div>
+            </div>
+            <div class="preference-grid" id="preferenceGrid"></div>
+          </article>
+        </section>
+
+        <section class="panel wide" id="team">
+          <div class="panel-head">
+            <div>
+              <span>Team Performance</span>
+              <h2>Assignments, stage completions, and handled value</h2>
+            </div>
+            <input id="teamSearch" class="search" type="search" placeholder="Search employee or role" />
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th data-sort="name">Employee</th>
+                  <th data-sort="role">Role</th>
+                  <th data-sort="department">Department</th>
+                  <th data-sort="assignments">Assignments</th>
+                  <th data-sort="completed">Completed</th>
+                  <th data-sort="value">Orders Value</th>
+                </tr>
+              </thead>
+              <tbody id="teamTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel wide" id="ordersRegister">
+          <div class="panel-head">
+            <div>
+              <span>Live Order Register</span>
+              <h2>Recent orders from filtered dataset</h2>
+            </div>
+            <div class="panel-actions">
+              <input id="orderSearch" class="search" type="search" placeholder="Search order, customer, city" />
+              <button id="exportOrdersBtn" class="btn-secondary" type="button">Export CSV</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th data-sort="order_id">Order</th>
+                  <th data-sort="customer_name">Customer</th>
+                  <th data-sort="product_category">Product</th>
+                  <th data-sort="order_channel">Channel</th>
+                  <th data-sort="current_status">Status</th>
+                  <th data-sort="current_stage">Stage</th>
+                  <th data-sort="final_price_inr">Value</th>
+                </tr>
+              </thead>
+              <tbody id="orderTable"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="orderCount"></span>
+            <button id="loadMoreOrders" class="btn-secondary" type="button">Load more</button>
+          </div>
+        </section>
+
+        <section class="data-strip">
+          <div><strong id="sheetOrders">0</strong><span>Orders rows</span></div>
+          <div><strong id="sheetStages">0</strong><span>Stage rows</span></div>
+          <div><strong id="sheetCustomers">0</strong><span>Customers</span></div>
+          <div><strong id="sheetEmployees">0</strong><span>Employees</span></div>
+          <div><strong id="sheetSummary">0</strong><span>Summary metrics</span></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

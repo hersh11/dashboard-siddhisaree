@@ -1,0 +1,28 @@
+How to Run the Siddhi Sarees Dashboard Locally
+
+1. Open PowerShell.
+
+2. Go to the dashboard folder:
+
+   cd "C:\Users\kitka\Downloads\internship project\dashboard"
+
+3. Start the local server:
+
+   node server.js
+
+4. Open this link in your browser:
+
+   http://127.0.0.1:8766/index.html
+
+5. Keep the PowerShell window open while using the dashboard.
+
+6. To stop the server, go back to PowerShell and press:
+
+   Ctrl + C
+
+Notes:
+
+- The dashboard runs locally on your computer.
+- Internet is not required for the charts because Chart.js is saved locally.
+- The dashboard data is loaded from dashboard-data.js, which was generated from the Excel workbook.
+- If port 8766 is already in use, close the old server window or change the port in server.js.
