@@ -291,22 +291,45 @@ function renderCharts(filtered) {
     options: { plugins: { legend: { display: false } } },
   });
 
+  // Time spent in a stage is the hand-off gap: how long an order sits after this
+  // stage is stamped before the next stage starts. Each stage row's own
+  // end_timestamp equals its start_timestamp in the source workbook, so
+  // (end - start) is always zero and cannot be used to measure this.
   const durations = {};
+  const stagesByOrder = new Map();
   filteredStages.forEach((stage) => {
-    if (!stage.start || !stage.end) return;
-    const hours = Math.max(0, stage.end - stage.start) / 36e5;
-    durations[stage.stage_name] ||= [];
-    durations[stage.stage_name].push(hours);
+    if (!stage.start) return;
+    if (!stagesByOrder.has(stage.order_id)) stagesByOrder.set(stage.order_id, []);
+    stagesByOrder.get(stage.order_id).push(stage);
   });
-  const durationValues = stageOrder.map((stageName) => {
+  stagesByOrder.forEach((orderStages) => {
+    orderStages.sort((a, b) => Number(a.stage_sequence) - Number(b.stage_sequence));
+    for (let i = 0; i < orderStages.length - 1; i += 1) {
+      const days = (orderStages[i + 1].start - orderStages[i].start) / 864e5;
+      if (!Number.isFinite(days) || days < 0) continue;
+      const stageName = orderStages[i].stage_name;
+      durations[stageName] ||= [];
+      durations[stageName].push(days);
+    }
+  });
+  // The final stage is dropped: nothing follows delivery, so it has no waiting time.
+  const durationStages = stageOrder.slice(0, -1);
+  const durationValues = durationStages.map((stageName) => {
     const values = durations[stageName] || [];
-    return values.length ? values.reduce((a, b) => a + b, 0) / values.length / 24 : 0;
+    return values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
   });
   makeChart("durationChart", {
     type: "line",
     data: {
-      labels: stageOrder,
-      datasets: [{ label: "Avg days", data: durationValues, borderColor: "#b8324a", backgroundColor: "rgba(184,50,74,.14)", fill: true, tension: 0.32 }],
+      labels: durationStages,
+      datasets: [{ label: "Avg days before next stage", data: durationValues, borderColor: "#b8324a", backgroundColor: "rgba(184,50,74,.14)", fill: true, tension: 0.32 }],
+    },
+    options: {
+      plugins: {
+        tooltip: {
+          callbacks: { label: (ctx) => `Average wait: ${ctx.parsed.y.toFixed(1)} days` },
+        },
+      },
     },
   });
 
