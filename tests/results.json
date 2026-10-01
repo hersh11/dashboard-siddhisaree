@@ -1,0 +1,434 @@
+[
+ {
+  "id": "TC-A1",
+  "module": "Data load",
+  "desc": "Page loads with no uncaught JavaScript errors",
+  "expected": "0 errors",
+  "actual": "1 errors",
+  "status": "FAIL",
+  "note": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+ },
+ {
+  "id": "TC-A2",
+  "module": "Data load",
+  "desc": "Orders sheet row count loaded into dashboard",
+  "expected": "1060",
+  "actual": "1060",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-A3",
+  "module": "Data load",
+  "desc": "OrderStages sheet row count loaded",
+  "expected": "7881",
+  "actual": "7881",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-A4",
+  "module": "Data load",
+  "desc": "Customers sheet row count loaded",
+  "expected": "780",
+  "actual": "780",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-A5",
+  "module": "Data load",
+  "desc": "Employees sheet row count loaded",
+  "expected": "30",
+  "actual": "30",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-A6",
+  "module": "Data load",
+  "desc": "Workflow completion badge shows 99%",
+  "expected": "99%",
+  "actual": "99%",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-B1",
+  "module": "KPI",
+  "desc": "Total Orders with no filter applied",
+  "expected": "1060",
+  "actual": "1060",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-B2",
+  "module": "KPI",
+  "desc": "Delivered Revenue equals sum of delivered orders",
+  "expected": "36412000",
+  "actual": "36412000",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-B3",
+  "module": "KPI",
+  "desc": "Average Order Value across all orders",
+  "expected": "41645",
+  "actual": "41645",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-B4",
+  "module": "KPI",
+  "desc": "Repeat customer share",
+  "expected": "32.6%",
+  "actual": "32.6%",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-B5",
+  "module": "KPI",
+  "desc": "Delivered + active counts in subtitle reconcile to total",
+  "expected": "1060",
+  "actual": "1060",
+  "status": "PASS",
+  "note": "905 delivered, 155 active/other"
+ },
+ {
+  "id": "TC-C1",
+  "module": "Filter",
+  "desc": "Status filter = Delivered",
+  "expected": "905",
+  "actual": "905",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-C2",
+  "module": "Filter",
+  "desc": "Category filter = Lehenga",
+  "expected": "350",
+  "actual": "350",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-C3",
+  "module": "Filter",
+  "desc": "Channel filter = Instagram DM",
+  "expected": "264",
+  "actual": "264",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-C4",
+  "module": "Filter",
+  "desc": "Priority filter = Rush",
+  "expected": "74",
+  "actual": "74",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-C5",
+  "module": "Filter",
+  "desc": "Two filters combined (Delivered + Saree) narrow the result",
+  "expected": "< 500 and > 0",
+  "actual": "434",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-C6",
+  "module": "Filter",
+  "desc": "Date range restricted to January 2026",
+  "expected": "194",
+  "actual": "194",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-C7",
+  "module": "Filter",
+  "desc": "Reset button restores the full dataset",
+  "expected": "1060",
+  "actual": "1060",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-C8",
+  "module": "Filter",
+  "desc": "Filter combination with no matches shows empty state, no crash",
+  "expected": "0 orders + empty message",
+  "actual": "0 orders, msg=1",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-D1",
+  "module": "Charts",
+  "desc": "All seven chart canvases are present and rendered",
+  "expected": "7",
+  "actual": "7",
+  "status": "PASS",
+  "note": "trendChart,statusChart,categoryChart,channelChart,stageChart,durationChart,geoChart"
+ },
+ {
+  "id": "TC-D2",
+  "module": "Charts",
+  "desc": "Monthly trend labels appear in chronological order",
+  "expected": "Jan..Jun 2026",
+  "actual": "Jan 2026, Feb 2026, Mar 2026, Apr 2026, May 2026, Jun 2026",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-D3",
+  "module": "Charts",
+  "desc": "Status doughnut values sum to the total order count",
+  "expected": "1060",
+  "actual": "1060",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-D4",
+  "module": "Charts",
+  "desc": "Revenue-by-category bars sum to total order value",
+  "expected": "44143500",
+  "actual": "44143500",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-D5",
+  "module": "Charts",
+  "desc": "Average time-in-stage chart reports non-zero waiting times",
+  "expected": "all 7 stages > 0",
+  "actual": "7/7 non-zero; max=13.8d",
+  "status": "PASS",
+  "note": "Order Created=0.97d; Designer Assigned=3.53d; Design Approved=0.44d; Production Assigned=13.80d; Quality Check=0.45d; Packaging=0.62d; Shipping=3.26d"
+ },
+ {
+  "id": "TC-D6",
+  "module": "Charts",
+  "desc": "Stage funnel never increases from one stage to the next",
+  "expected": "non-increasing",
+  "actual": "[1060, 1052, 1031, 1020, 924, 923, 918, 905]",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-E1",
+  "module": "Tables",
+  "desc": "Team table lists every employee",
+  "expected": "30",
+  "actual": "30",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-E2",
+  "module": "Tables",
+  "desc": "Team table default-sorts by assignments, highest first",
+  "expected": "row1 >= row2",
+  "actual": "657 >= 602",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-E3",
+  "module": "Tables",
+  "desc": "Team search narrows the table to matching roles",
+  "expected": "< 30 rows",
+  "actual": "5 rows",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-E3b",
+  "module": "Tables",
+  "desc": "Team search with no match shows a friendly empty message",
+  "expected": "empty message",
+  "actual": "1 message",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-E4",
+  "module": "Tables",
+  "desc": "Order register shows the first 50 orders by default",
+  "expected": "50",
+  "actual": "50",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-E5",
+  "module": "Tables",
+  "desc": "Order register footer reports the full filtered total",
+  "expected": "Showing 50 of 1,060 orders",
+  "actual": "Showing 50 of 1,060 orders",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-E6",
+  "module": "Tables",
+  "desc": "Load more adds the next 50 orders",
+  "expected": "100",
+  "actual": "100",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-E7",
+  "module": "Tables",
+  "desc": "Clicking the Value header sorts orders by value",
+  "expected": "ascending",
+  "actual": "1600 .. 6900",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-E8",
+  "module": "Tables",
+  "desc": "Order register search filters by city",
+  "expected": "fewer than 1,060",
+  "actual": "Showing 50 of 285 orders",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-F1",
+  "module": "Export",
+  "desc": "CSV export contains a header row plus every filtered order",
+  "expected": "1061",
+  "actual": "1061",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-F2",
+  "module": "Export",
+  "desc": "CSV header lists all twelve expected columns",
+  "expected": "12",
+  "actual": "12",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-F3",
+  "module": "Export",
+  "desc": "CSV export respects the active filter (Gown only)",
+  "expected": "46",
+  "actual": "46",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-G1",
+  "module": "Theme",
+  "desc": "Toggle switches the dashboard to dark mode",
+  "expected": "dark",
+  "actual": "dark",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-G2",
+  "module": "Theme",
+  "desc": "Chosen theme is written to browser storage",
+  "expected": "dark",
+  "actual": "dark",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-G3",
+  "module": "Theme",
+  "desc": "Theme choice survives a page reload",
+  "expected": "dark",
+  "actual": "dark",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-G4",
+  "module": "Accessibility",
+  "desc": "Table headers can be sorted using only the keyboard",
+  "expected": "sorted by role",
+  "actual": "Designer .. Shipping Coordinator",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-G5",
+  "module": "Accessibility",
+  "desc": "Sortable headers expose a screen-reader label",
+  "expected": "aria-label present",
+  "actual": "Sort by Role",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-H1",
+  "module": "Responsive",
+  "desc": "Desktop (1440px): page does not scroll sideways",
+  "expected": "no horizontal overflow",
+  "actual": "0px overflow",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-H2",
+  "module": "Responsive",
+  "desc": "Tablet (1024px): page does not scroll sideways",
+  "expected": "no horizontal overflow",
+  "actual": "0px overflow",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-H3",
+  "module": "Responsive",
+  "desc": "Mobile (390px): page does not scroll sideways",
+  "expected": "no horizontal overflow",
+  "actual": "0px overflow",
+  "status": "PASS",
+  "note": ""
+ },
+ {
+  "id": "TC-A7",
+  "module": "Data load",
+  "desc": "Dashboard loads no files from the internet (offline claim)",
+  "expected": "0 external requests",
+  "actual": "1 external",
+  "status": "FAIL",
+  "note": "https://fonts.googleapis.com/css2"
+ },
+ {
+  "id": "TC-A8",
+  "module": "Data load",
+  "desc": "With the font CDN unreachable, the dashboard still renders in full",
+  "expected": "KPIs, tables and charts all render",
+  "actual": "orders=1060, rows=50, charts=7",
+  "status": "PASS",
+  "note": "Falls back to Georgia / system sans as declared in CSS"
+ },
+ {
+  "id": "TC-D5b",
+  "module": "Charts",
+  "desc": "Root cause: every stage row stores the same start and end time",
+  "expected": "end differs from start on some rows",
+  "actual": "7833 of 7833 rows identical",
+  "status": "DIAG",
+  "note": "Confirms the original (end - start) formula could only ever return zero"
+ }
+]

@@ -4,7 +4,7 @@ How to Run the Siddhi Sarees Dashboard Locally
 
 2. Go to the dashboard folder:
 
-   cd "C:\Users\kitka\Downloads\internship project\dashboard"
+   cd path\to\dashboard-siddhisaree   (the folder that contains server.js)
 
 3. Start the local server:
 
