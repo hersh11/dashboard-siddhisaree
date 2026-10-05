@@ -18,7 +18,7 @@ The eight stages: Order Created, Designer Assigned, Design Approved, Production 
 
 ## Running it
 
-You need Node.js. `server.js` is a 46-line static file server with no dependencies.
+You need Node.js. `server.js` is a small static file server with no dependencies.
 
 ```bash
 git clone https://github.com/hersh11/dashboard-siddhisaree.git
@@ -45,7 +45,7 @@ Last run: 45 passed, 2 failed, 1 diagnostic.
 
 The tests caught a real bug. The "average time spent by stage" chart showed zero for every stage. It was subtracting each stage's start time from its end time, but every stage row has the same timestamp in both columns. A stage row is a stamp, not a span. The time an order waits at a stage is the gap until its next stage, so `app.js` now measures that instead. With the fix, production is where orders sit longest: 13.8 days on average.
 
-The two failures are one known issue. The display fonts come from Google Fonts, so the page isn't fully offline, and in a run with no internet both failures come from that. The dashboard still renders everything without them and falls back to Georgia and the system sans-serif (TC-A8). Self-hosting the fonts is first on the list below.
+The two failures were one known issue: the display fonts came from Google Fonts, so the page wasn't fully offline (TC-A1, TC-A7). The fonts are now self-hosted in `fonts/`, so the page makes no requests to other sites. The suite hasn't been re-run since that change.
 
 To run the tests:
 
@@ -64,8 +64,11 @@ dashboard-siddhisaree/
 ├── styles.css                  theme, layout, responsive rules, motion
 ├── app.js                      filters, sorting, KPIs, charts, CSV export
 ├── dashboard-data.js           the workbook data as a JS object
-├── chart.umd.min.js            Chart.js, kept in the repo so charts work offline
+├── chart.umd.min.js            Chart.js 4.4.1, kept in the repo so charts work offline
+├── fonts/                      Inter and Playfair Display (variable, woff2) and their licences
 ├── server.js                   local static server
+├── 404.html                    not-found page
+├── robots.txt, llms.txt        notes for search engines and AI assistants
 ├── hero-textile.jpg            header background
 ├── siddhi_sarees_dataset.xlsx  the source workbook
 ├── data_generation/            seeded generators + build_workbook.py
@@ -88,11 +91,11 @@ The workbook has five sheets the dashboard uses, plus a README sheet:
 
 ## Design
 
-Maroon, teal and gold, on warm cream in light mode and warm charcoal in dark mode, to suit a textile brand. Headings and KPI numbers use Playfair Display and the rest uses Inter. The scroll reveal and the small lift when you hover a card are CSS transitions; the KPI count-up is a few lines of JavaScript.
+Maroon, teal and gold, on warm cream in light mode and warm charcoal in dark mode, to suit a textile brand. Headings and KPI numbers use Playfair Display and the rest uses Inter, both self-hosted. The scroll reveal and the small lift when you hover a card are CSS transitions; the KPI count-up is a few lines of JavaScript.
 
 ## Next
 
-- [ ] Self-host Playfair Display and Inter so it really works offline
+- [x] Self-host Playfair Display and Inter so it really works offline
 - [ ] Compare this month with last month
 - [ ] A drill-down page for each employee
 - [ ] CSV export for the team table too (only the order register exports right now)

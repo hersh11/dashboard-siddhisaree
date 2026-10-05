@@ -4,12 +4,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Siddhi Sarees | Order Analytics Dashboard</title>
+    <meta name="description" content="Order analytics dashboard built during an internship at Siddhi Sarees: sales, order status, the eight-stage production workflow and team workload, with filters, sortable tables and CSV export. Runs on synthetic data." />
+    <meta name="author" content="Harsh Narain" />
+    <meta name="theme-color" content="#b8324a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Siddhi Sarees Order Analytics Dashboard" />
+    <meta property="og:description" content="Sales, order status, production workflow and team workload for a saree business, on synthetic data. Built with HTML, CSS, JavaScript and Chart.js." />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b8324a'/%3E%3Ctext x='32' y='45' font-size='36' font-family='Arial' font-weight='800' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link rel="preload" href="./fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Siddhi Sarees Order Analytics Dashboard",
+        "description": "Order analytics dashboard for a saree business, covering sales, order status, an eight-stage production workflow and team workload. Runs on synthetic data.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "isAccessibleForFree": true,
+        "author": { "@type": "Person", "name": "Harsh Narain", "url": "https://github.com/hersh11" }
+      }
+    </script>
     <script>
       try {
         document.documentElement.dataset.theme = localStorage.getItem("siddhi-theme") || "light";
@@ -50,6 +66,7 @@
           <div>
             <h1>Internal Order Management & Business Analytics Dashboard</h1>
             <p class="hero-copy">A working analytics layer for Siddhi Sarees that turns scattered order notes, assignments, and production updates into management-ready insights.</p>
+            <p class="data-note">Demo with synthetic data. No real customer or sales figures are shown.</p>
           </div>
           <div class="hero-panel">
             <span class="pulse"></span>
@@ -119,7 +136,7 @@
                 <h2>Monthly revenue and order flow</h2>
               </div>
             </div>
-            <div class="chart-wrap tall"><canvas id="trendChart"></canvas></div>
+            <div class="chart-wrap tall"><canvas id="trendChart" role="img" aria-label="Bar and line chart: delivered revenue and number of orders for each month"></canvas></div>
           </article>
           <article class="panel">
             <div class="panel-head">
@@ -128,7 +145,7 @@
                 <h2>Current order outcomes</h2>
               </div>
             </div>
-            <div class="chart-wrap tall"><canvas id="statusChart"></canvas></div>
+            <div class="chart-wrap tall"><canvas id="statusChart" role="img" aria-label="Doughnut chart: number of orders in each current status"></canvas></div>
           </article>
         </section>
 
@@ -140,7 +157,7 @@
                 <h2>Revenue by category</h2>
               </div>
             </div>
-            <div class="chart-wrap"><canvas id="categoryChart"></canvas></div>
+            <div class="chart-wrap"><canvas id="categoryChart" role="img" aria-label="Horizontal bar chart: order value by product category"></canvas></div>
           </article>
           <article class="panel">
             <div class="panel-head">
@@ -149,7 +166,7 @@
                 <h2>Channel contribution</h2>
               </div>
             </div>
-            <div class="chart-wrap"><canvas id="channelChart"></canvas></div>
+            <div class="chart-wrap"><canvas id="channelChart" role="img" aria-label="Polar area chart: number of orders from each sales channel"></canvas></div>
           </article>
         </section>
 
@@ -161,7 +178,7 @@
                 <h2>Stage completion funnel</h2>
               </div>
             </div>
-            <div class="chart-wrap"><canvas id="stageChart"></canvas></div>
+            <div class="chart-wrap"><canvas id="stageChart" role="img" aria-label="Bar chart: completed records for each of the eight order stages"></canvas></div>
           </article>
           <article class="panel">
             <div class="panel-head">
@@ -170,7 +187,7 @@
                 <h2>Average time spent by stage</h2>
               </div>
             </div>
-            <div class="chart-wrap"><canvas id="durationChart"></canvas></div>
+            <div class="chart-wrap"><canvas id="durationChart" role="img" aria-label="Line chart: average days an order waits at each stage before moving to the next"></canvas></div>
           </article>
         </section>
 
@@ -182,7 +199,7 @@
                 <h2>Domestic and NRI demand</h2>
               </div>
             </div>
-            <div class="chart-wrap"><canvas id="geoChart"></canvas></div>
+            <div class="chart-wrap"><canvas id="geoChart" role="img" aria-label="Doughnut chart: number of orders by customer country"></canvas></div>
           </article>
           <article class="panel">
             <div class="panel-head">

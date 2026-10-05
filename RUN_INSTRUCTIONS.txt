@@ -23,6 +23,6 @@ How to Run the Siddhi Sarees Dashboard Locally
 Notes:
 
 - The dashboard runs locally on your computer.
-- Internet is not required for the charts because Chart.js is saved locally.
+- Internet is not required: Chart.js and the fonts are saved in the project folder.
 - The dashboard data is loaded from dashboard-data.js, which was generated from the Excel workbook.
 - If port 8766 is already in use, close the old server window or change the port in server.js.

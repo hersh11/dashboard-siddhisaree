@@ -169,6 +169,8 @@ The chart went from carrying no information to carrying the single most useful f
 
 **Why it was not fixed.** Fixing it properly means downloading the font files into the project and rewriting the stylesheet to point at them. That is a packaging change, not a code fix, and it did not seem worth making days before the review when the failure mode is a slightly different-looking heading. It is recorded here honestly and listed first in future scope.
 
+**Update, October 2026.** Fixed: Inter and Playfair Display are now self-hosted in `fonts/` and `index.html` no longer links to Google Fonts. The suite has not been re-run since, so the results above still show the two failures.
+
 ## What the test run does not cover
 
 Being straight about the limits:

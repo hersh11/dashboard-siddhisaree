@@ -1,0 +1,15 @@
+# Siddhi Sarees Order Analytics Dashboard
+
+> An order analytics dashboard built during a summer internship at Siddhi Sarees (June to July 2026). It shows sales, order status, the eight-stage production workflow and team workload. All data is synthetic: 1,060 generated orders from January to June 2026.
+
+The dashboard is one page of semantic HTML, hand-written CSS and plain JavaScript, with Chart.js for the charts. There is no framework and no build step.
+
+## Page
+
+- [Dashboard](./): KPIs, seven charts, filters, a sortable team table, and an order register with search and CSV export.
+
+## Source and documentation
+
+- [GitHub repository](https://github.com/hersh11/dashboard-siddhisaree)
+- [Project report](https://github.com/hersh11/dashboard-siddhisaree/blob/main/PROJECT_REPORT.md): what was built during the internship and why
+- [Test report](https://github.com/hersh11/dashboard-siddhisaree/blob/main/tests/TEST_REPORT.md): the Playwright suite and its results
