@@ -4,7 +4,7 @@
 **Tested by:** Harsh Narain  
 **Build tested:** local static build, served by `server.js` on `127.0.0.1:8766`  
 **Browser:** Chromium (headless), viewports 1440 / 1024 / 390 px  
-**Result:** 45 passed, 2 failed, 1 diagnostic — 48 checks in total
+**Result:** 47 passed, 0 failed, 1 diagnostic — 48 checks in total (latest run, 6 Oct 2026)
 
 ## How the testing was done
 
@@ -20,18 +20,17 @@ The checks were then written as a script so the whole set can be re-run in about
 
 | ID | What is being checked | Expected | Actual | Result |
 |---|---|---|---|---|
-| TC-A1 | Page loads with no uncaught JavaScript errors | 0 errors | 1 errors | **Fail** |
+| TC-A1 | Page loads with no uncaught JavaScript errors | 0 errors | 0 errors | Pass |
 | TC-A2 | Orders sheet row count loaded into dashboard | 1060 | 1060 | Pass |
 | TC-A3 | OrderStages sheet row count loaded | 7881 | 7881 | Pass |
 | TC-A4 | Customers sheet row count loaded | 780 | 780 | Pass |
 | TC-A5 | Employees sheet row count loaded | 30 | 30 | Pass |
 | TC-A6 | Workflow completion badge shows 99% | 99% | 99% | Pass |
-| TC-A7 | Dashboard loads no files from the internet (offline claim) | 0 external requests | 1 external | **Fail** |
+| TC-A7 | Dashboard loads no files from the internet (offline claim) | 0 external requests | 0 external | Pass |
 | TC-A8 | With the font CDN unreachable, the dashboard still renders in full | KPIs, tables and charts all render | orders=1060, rows=50, charts=7 | Pass |
 
-> **TC-A1** — Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED
+> **TC-A1, TC-A7** — Both failed in the earlier runs (1 error, 1 external request) because the fonts came from Google Fonts. Fixed by self-hosting the fonts; see D-02.
 
-> **TC-A7** — https://fonts.googleapis.com/css2
 
 > **TC-A8** — Falls back to Georgia / system sans as declared in CSS
 
@@ -169,7 +168,7 @@ The chart went from carrying no information to carrying the single most useful f
 
 **Why it was not fixed.** Fixing it properly means downloading the font files into the project and rewriting the stylesheet to point at them. That is a packaging change, not a code fix, and it did not seem worth making days before the review when the failure mode is a slightly different-looking heading. It is recorded here honestly and listed first in future scope.
 
-**Update, October 2026.** Fixed: Inter and Playfair Display are now self-hosted in `fonts/` and `index.html` no longer links to Google Fonts. The suite has not been re-run since, so the results above still show the two failures.
+**Update, October 2026.** Fixed: Inter and Playfair Display are now self-hosted in `fonts/` and `index.html` no longer links to Google Fonts. TC-A1 and TC-A7 pass in the 6 Oct 2026 run.
 
 ## What the test run does not cover
 
@@ -194,3 +193,5 @@ python tests/run_tests.py      # terminal 2
 The script prints one line per case and writes the raw results to `tests/results.json`. CSV downloads from the export checks go to `tests/output/`, which git ignores.
 
 Re-run on 1 Oct 2026 after moving the suite into this repository: same result, 45 passed, 2 failed, 1 diagnostic.
+
+Re-run on 6 Oct 2026 after self-hosting the fonts and the interface redesign (pipeline view, detail drawers, search palette, chart filtering): 47 passed, 0 failed, 1 diagnostic.

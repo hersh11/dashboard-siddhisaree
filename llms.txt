@@ -6,7 +6,7 @@ The dashboard is one page of semantic HTML, hand-written CSS and plain JavaScrip
 
 ## Page
 
-- [Dashboard](./): KPIs, seven charts, filters, a sortable team table, and an order register with search and CSV export.
+- [Dashboard](./): KPIs with month-on-month changes, a live pipeline of where active orders are waiting, seven charts that filter the page when clicked, a sortable team table, and an order register with search and CSV export. Each order opens a timeline of its eight stages; each employee opens their workload.
 
 ## Source and documentation
 

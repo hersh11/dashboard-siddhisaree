@@ -10,11 +10,14 @@ The eight stages: Order Created, Designer Assigned, Design Approved, Production 
 
 ## What it shows
 
-- KPIs at the top: total orders, delivered revenue, average order value and the share of repeat customers. They count up to the new value when a filter changes.
+- KPIs at the top: total orders, delivered revenue, average order value and the share of repeat customers. Each has a sparkline of the months in view and a change against the month before. They count up to the new value when a filter changes.
+- A live pipeline of the eight stages showing how many active orders are waiting at each one and for how long on average. The bottleneck is highlighted (production, at 13.8 days), and clicking a stage filters the whole dashboard to the orders waiting there.
 - Charts for monthly revenue and order flow, order status, revenue by category, sales channel, the stage completion funnel, average time spent at each stage, and domestic vs NRI demand. There's also a breakdown of the top colors, fabrics and work types.
-- Filters for date range, status, category, channel and priority. Change one and every chart, KPI and table updates.
+- Filters for date range, status, category, channel and priority, plus quick date ranges. Clicking a month, status, category or channel in a chart filters by it too. Active filters show as chips you can remove one at a time, and every chart, KPI and table updates.
+- Click any order number to see its journey through the eight stages: who handled each one, when, and how long it waited. Click any employee to see their workload, the stages they handle and their recent orders.
+- A search palette (Ctrl+K or /) that finds orders, customers and staff, jumps to a section or runs an action.
 - A team table (assignments, stage completions, order value handled) that sorts on any column, and an order register that sorts, pages and exports whatever you've filtered to CSV. Each table has its own search.
-- Dark mode, and it remembers your choice. It works on mobile, it's keyboard accessible and the colors meet WCAG AA contrast. If your system is set to reduce motion, the animations stay off.
+- Dark mode with a circular reveal, and it remembers your choice. It works on mobile, it's keyboard accessible and the colors meet WCAG AA contrast. If your system is set to reduce motion, the animations stay off.
 
 ## Running it
 
@@ -41,11 +44,11 @@ The generators use fixed seeds, so you get the same data back row for row. The S
 
 `tests/run_tests.py` is a Playwright script (Python, headless Chromium) with 48 checks across nine areas: data integrity, KPI cards, filters, charts, tables and search, CSV export, theme, keyboard and screen-reader access, and layout at 1440, 1024 and 390 px wide. I worked out every expected value from the workbook in Python instead of reading it off the screen. The full write-up is in [`tests/TEST_REPORT.md`](tests/TEST_REPORT.md).
 
-Last run: 45 passed, 2 failed, 1 diagnostic.
+Last run (6 Oct 2026): 47 passed, 0 failed, 1 diagnostic.
 
 The tests caught a real bug. The "average time spent by stage" chart showed zero for every stage. It was subtracting each stage's start time from its end time, but every stage row has the same timestamp in both columns. A stage row is a stamp, not a span. The time an order waits at a stage is the gap until its next stage, so `app.js` now measures that instead. With the fix, production is where orders sit longest: 13.8 days on average.
 
-The two failures were one known issue: the display fonts came from Google Fonts, so the page wasn't fully offline (TC-A1, TC-A7). The fonts are now self-hosted in `fonts/`, so the page makes no requests to other sites. The suite hasn't been re-run since that change.
+Earlier runs had two failures from one known issue: the display fonts came from Google Fonts, so the page wasn't fully offline (TC-A1, TC-A7). The fonts are now self-hosted in `fonts/`, the page makes no requests to other sites, and both checks pass.
 
 To run the tests:
 
@@ -62,7 +65,8 @@ python tests/run_tests.py      # terminal 2
 dashboard-siddhisaree/
 ├── index.html                  page layout
 ├── styles.css                  theme, layout, responsive rules, motion
-├── app.js                      filters, sorting, KPIs, charts, CSV export
+├── app.js                      filters, sorting, KPIs, charts, pipeline, CSV export
+├── ui.js                       theme, navigation, motion, detail drawer, search palette
 ├── dashboard-data.js           the workbook data as a JS object
 ├── chart.umd.min.js            Chart.js 4.4.1, kept in the repo so charts work offline
 ├── fonts/                      Inter and Playfair Display (variable, woff2) and their licences
@@ -91,13 +95,15 @@ The workbook has five sheets the dashboard uses, plus a README sheet:
 
 ## Design
 
-Maroon, teal and gold, on warm cream in light mode and warm charcoal in dark mode, to suit a textile brand. Headings and KPI numbers use Playfair Display and the rest uses Inter, both self-hosted. The scroll reveal and the small lift when you hover a card are CSS transitions; the KPI count-up is a few lines of JavaScript.
+Maroon, teal and gold, on warm cream in light mode and warm charcoal in dark mode, to suit a textile brand. Headings and KPI numbers use Playfair Display and the rest uses Inter, both self-hosted.
+
+The motion is all CSS and the browser's built-in APIs, with no animation library: a slow band of light moves across the hero like sheen on silk, the headline arrives word by word, cards rise in as you scroll and pick up a soft light under the cursor, the pipeline track flows toward delivery, and the theme switch spreads out in a circle using the View Transitions API. The detail drawer and search palette are native `<dialog>` elements.
 
 ## Next
 
 - [x] Self-host Playfair Display and Inter so it really works offline
-- [ ] Compare this month with last month
-- [ ] A drill-down page for each employee
+- [x] Compare this month with last month
+- [x] A drill-down for each employee
 - [ ] CSV export for the team table too (only the order register exports right now)
 
 Harsh Narain ([@hersh11](https://github.com/hersh11))

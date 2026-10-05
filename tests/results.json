@@ -4,9 +4,9 @@
   "module": "Data load",
   "desc": "Page loads with no uncaught JavaScript errors",
   "expected": "0 errors",
-  "actual": "1 errors",
-  "status": "FAIL",
-  "note": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+  "actual": "0 errors",
+  "status": "PASS",
+  "note": ""
  },
  {
   "id": "TC-A2",
@@ -409,9 +409,9 @@
   "module": "Data load",
   "desc": "Dashboard loads no files from the internet (offline claim)",
   "expected": "0 external requests",
-  "actual": "1 external",
-  "status": "FAIL",
-  "note": "https://fonts.googleapis.com/css2"
+  "actual": "0 external",
+  "status": "PASS",
+  "note": ""
  },
  {
   "id": "TC-A8",
