@@ -78,8 +78,8 @@ rows = [
     ("Image references", "Filenames only (e.g. IMG_ORD1001_DesignApproved_1.jpg) as a placeholder for wherever "
         "actual stage photos will be stored (e.g. cloud storage / Drive folder linked by order_id + stage)."),
     ("Regenerating data", "This was generated with a Python script (gen_employees.py / gen_customers.py / "
-        "gen_orders.py / build_workbook.py). Ask Claude to adjust volume, seasonality, price ranges, "
-        "or add more product types and regenerate any time."),
+        "gen_orders.py / build_workbook.py). Edit the generators to change volume, seasonality, price ranges "
+        "or product types, then rebuild the workbook."),
 ]
 for r in rows:
     ws.append(r)
