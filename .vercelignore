@@ -1,0 +1,7 @@
+# Kept in the repository, not published with the website
+tests/
+data_generation/
+server.js
+RUN_INSTRUCTIONS.txt
+PROJECT_REPORT.md
+siddhi_sarees_dataset.xlsx
