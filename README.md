@@ -1,5 +1,7 @@
 # Siddhi Sarees order analytics dashboard
 
+**Live demo: [siddhi-sarees-dashboard.vercel.app](https://siddhi-sarees-dashboard.vercel.app)**
+
 I built this during my summer internship at Siddhi Sarees (June to July 2026). It wasn't an assigned task. Every order there goes through eight stages, each handled by a different person, and there was no single place to see where an order stood. So I made one.
 
 It shows what's selling, where orders get stuck and who is handling what. It's semantic HTML, hand-written CSS (custom properties, Grid, Flexbox) and plain ES2020 JavaScript, with Chart.js for the charts. There's no framework and no build step, and you don't need to `npm install` anything.
@@ -21,7 +23,9 @@ The eight stages: Order Created, Designer Assigned, Design Approved, Production 
 
 ## Running it
 
-You need Node.js. `server.js` is a small static file server with no dependencies.
+The live site is hosted on Vercel as a plain static site (`vercel.json`) and redeploys on every push to `main`. `.vercelignore` keeps the tests, generators and local server out of the deployment.
+
+To run it locally you need Node.js. `server.js` is a small static file server with no dependencies.
 
 ```bash
 git clone https://github.com/hersh11/dashboard-siddhisaree.git
